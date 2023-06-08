@@ -11,12 +11,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/feature-account" />
-            <option value="$PROJECT_DIR$/feature-cart" />
-            <option value="$PROJECT_DIR$/feature-category" />
-            <option value="$PROJECT_DIR$/feature-main" />
-            <option value="$PROJECT_DIR$/feature-product" />
-            <option value="$PROJECT_DIR$/feature-search" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/categories" />
+            <option value="$PROJECT_DIR$/data/dishes" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/account" />
+            <option value="$PROJECT_DIR$/feature/cart" />
+            <option value="$PROJECT_DIR$/feature/category" />
+            <option value="$PROJECT_DIR$/feature/main" />
+            <option value="$PROJECT_DIR$/feature/product" />
+            <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/network" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -33,15 +33,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+    dynamicFeatures = []
 }
 
 dependencies {
-    implementation project(path: ':feature-main')
-    implementation project(path: ':feature-cart')
-    implementation project(path: ':feature-category')
-    implementation project(path: ':feature-product')
-    implementation project(path: ':feature-account')
-    implementation project(path: ':feature-search')
+    implementation project(path: ':feature:main')
+    implementation project(path: ':feature:cart')
+    implementation project(path: ':feature:category')
+    implementation project(path: ':feature:product')
+    implementation project(path: ':feature:account')
+    implementation project(path: ':feature:search')
+    implementation project(path: ':network')
+    implementation project(path: ':data:categories')
+    implementation project(path: ':data:dishes')
+
+    implementation "io.insert-koin:koin-android:3.4.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

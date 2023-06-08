@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_main">
+    app:startDestination="@id/navigation_category">
 
     <fragment
         android:id="@+id/navigation_main"
-        android:name="com.nikitagorbatko.feature_main.MainFragment"
+        android:name="com.nikitagorbatko.main.MainFragment"
         android:label="@string/title_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -17,11 +17,11 @@
 
     <fragment
         android:id="@+id/navigation_cart"
-        android:name="com.nikitagorbatko.feature_cart.CartFragment"
+        android:name="com.nikitagorbatko.cart.CartFragment"
         android:label="@string/title_cart" />
     <fragment
         android:id="@+id/navigation_category"
-        android:name="com.nikitagorbatko.feature_category.CategoryFragment"
+        android:name="com.nikitagorbatko.category.CategoryFragment"
         android:label="@string/title_category" >
         <action
             android:id="@+id/action_navigation_category_to_navigation_product"
@@ -30,15 +30,15 @@
 
     <fragment
         android:id="@+id/navigation_product"
-        android:name="com.nikitagorbatko.feature_product.ProductFragment"
+        android:name="com.nikitagorbatko.product.ProductFragment"
         android:label="ProductFragment" />
     <fragment
-        android:id="@+id/navigation_account"
-        android:name="com.nikitagorbatko.feature_account.AccountFragment"
-        android:label="AccountFragment" />
-    <fragment
         android:id="@+id/navigation_search"
-        android:name="com.nikitagorbatko.feature_search.SearchFragment"
+        android:name="com.nikitagorbatko.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.nikitagorbatko.account.AccountFragment"
+        android:label="AccountFragment" />
 
 </navigation>
