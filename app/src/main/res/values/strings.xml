@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Test Foods</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_account">Account</string>
+    <string name="title_search">Search</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_main">Main</string>
+    <string name="title_category">Category</string>
+    <string name="title_product">Product</string>
+
 </resources>

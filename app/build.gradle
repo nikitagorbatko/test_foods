@@ -36,6 +36,12 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':feature-main')
+    implementation project(path: ':feature-cart')
+    implementation project(path: ':feature-category')
+    implementation project(path: ':feature-product')
+    implementation project(path: ':feature-account')
+    implementation project(path: ':feature-search')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
