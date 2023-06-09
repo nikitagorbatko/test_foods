@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_category">
+    app:startDestination="@id/navigation_main">
 
     <fragment
         android:id="@+id/navigation_main"
@@ -21,7 +21,7 @@
         android:label="@string/title_cart" />
     <fragment
         android:id="@+id/navigation_category"
-        android:name="com.nikitagorbatko.category.CategoryFragment"
+        android:name="com.nikitagorbatko.category.DishesFragment"
         android:label="@string/title_category" >
         <action
             android:id="@+id/action_navigation_category_to_navigation_product"
