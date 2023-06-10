@@ -40,7 +40,6 @@ dependencies {
     implementation project(path: ':feature:main')
     implementation project(path: ':feature:cart')
     implementation project(path: ':feature:dishes')
-    implementation project(path: ':feature:product')
     implementation project(path: ':feature:account')
     implementation project(path: ':feature:search')
     implementation project(path: ':network')
@@ -48,10 +47,13 @@ dependencies {
     implementation project(path: ':data:dishes')
 
     implementation "io.insert-koin:koin-android:3.4.0"
+
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
+    implementation 'androidx.activity:activity:1.7.2'
+    implementation "androidx.activity:activity-ktx:1.7.2"
+
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'

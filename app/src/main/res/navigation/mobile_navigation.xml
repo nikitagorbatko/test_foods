@@ -9,29 +9,29 @@
         android:id="@+id/navigation_main"
         android:name="com.nikitagorbatko.main.MainFragment"
         android:label="@string/title_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
+        <!--        <action-->
+        <!--            android:id="@+id/action_navigation_main_to_navigation_category"-->
+        <!--            app:destination="@id/navigation_dishes" />-->
         <action
-            android:id="@+id/action_navigation_main_to_navigation_category"
-            app:destination="@id/navigation_category" />
+            android:id="@+id/action_navigation_main_to_dishesFragment"
+            app:destination="@id/navigation_dishes" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.nikitagorbatko.cart.CartFragment"
         android:label="@string/title_cart" />
-    <fragment
-        android:id="@+id/navigation_category"
-        android:name="com.nikitagorbatko.category.DishesFragment"
-        android:label="@string/title_category" >
-        <action
-            android:id="@+id/action_navigation_category_to_navigation_product"
-            app:destination="@id/navigation_product" />
-    </fragment>
 
     <fragment
-        android:id="@+id/navigation_product"
-        android:name="com.nikitagorbatko.product.ProductFragment"
-        android:label="ProductFragment" />
+        android:id="@+id/navigation_dishes"
+        android:name="com.nikitagorbatko.category.DishesFragment"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_dishes">
+
+        <deepLink app:uri="android-app://com.nikitagorbatko.testfoods/navigation_dishes" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.nikitagorbatko.search.SearchFragment"

@@ -19,7 +19,6 @@
             <option value="$PROJECT_DIR$/feature/cart" />
             <option value="$PROJECT_DIR$/feature/dishes" />
             <option value="$PROJECT_DIR$/feature/main" />
-            <option value="$PROJECT_DIR$/feature/product" />
             <option value="$PROJECT_DIR$/feature/search" />
             <option value="$PROJECT_DIR$/network" />
           </set>
