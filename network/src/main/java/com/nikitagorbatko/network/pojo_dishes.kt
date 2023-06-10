@@ -1,22 +1,25 @@
 package com.nikitagorbatko.network
 
+import android.os.Parcelable
+import com.nikitagorbatko.entity.Dish
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class DishDto(
-    @Json(name = "id") var id: Int,
-    @Json(name = "name") var name: String? = null,
-    @Json(name = "price") var price: Int? = null,
-    @Json(name = "weight") var weight: Int? = null,
-    @Json(name = "description") var description: String? = null,
-    @Json(name = "image_url") var imageUrl: String? = null,
-    @Json(name = "tegs") var tegs: List<String> = listOf()
-) : Dish
+    @Json(name = "id") override val id: Int,
+    @Json(name = "name") override val name: String? = null,
+    @Json(name = "price") override val price: Int? = null,
+    @Json(name = "weight") override val weight: Int? = null,
+    @Json(name = "description") override val description: String? = null,
+    @Json(name = "image_url") override val imageUrl: String? = null,
+    @Json(name = "tegs") override val tegs: List<String> = listOf()
+) : Dish, Parcelable
 
-interface Dish {}
 
 @JsonClass(generateAdapter = true)
 data class DishesResponseDto(
-    @Json(name = "dishes") var dishes: List<DishDto> = listOf()
+    @Json(name = "dishes") val dishes: List<DishDto> = listOf()
 )

@@ -3,7 +3,7 @@ package com.nikitagorbatko.category
 import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.nikitagorbatko.category.databinding.ItemDishBinding
-import com.nikitagorbatko.network.Dish
+import com.nikitagorbatko.entity.Dish
 import com.nikitagorbatko.network.DishDto
 
 fun dishAdapterDelegate(onItemClick: (Dish) -> Unit) =
@@ -16,7 +16,7 @@ fun dishAdapterDelegate(onItemClick: (Dish) -> Unit) =
         bind {
             Glide
                 .with(binding.root)
-                .load(item.imageUrl)
+                .load(item.imageUrl ?: item.description)
                 .into(binding.imageDish)
             binding.textDishName.text = item.name
         }

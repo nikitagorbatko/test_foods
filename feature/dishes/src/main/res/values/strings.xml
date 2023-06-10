@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_network">No network connection</string>
+    <string name="add_to_cart_text">Add to cart</string>
+
 </resources>

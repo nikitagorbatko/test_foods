@@ -34,6 +34,14 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':entity')
+    implementation project(path: ':data:cart_dishes')
+    implementation project(path: ':database')
+
+    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
     implementation "io.insert-koin:koin-android:3.4.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'

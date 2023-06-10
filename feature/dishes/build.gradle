@@ -36,6 +36,9 @@ android {
 dependencies {
     implementation project(path: ':data:dishes')
     implementation project(path: ':network')
+    implementation project(path: ':database')
+    implementation project(path: ':entity')
+
 
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
 

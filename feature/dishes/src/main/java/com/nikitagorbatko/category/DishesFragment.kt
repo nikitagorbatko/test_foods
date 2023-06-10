@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.ChipGroup
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.nikitagorbatko.category.databinding.FragmentDishesBinding
+import com.nikitagorbatko.network.DishDto
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,7 +35,7 @@ class DishesFragment : Fragment() {
 //                .fromUri("android-app://com.nikitagorbatko.testfoods/navigation_product".toUri())
 //                .build()
 //            findNavController().navigate(request)
-            SimpleFragment.newInstance("Haribol", "sadf").show(childFragmentManager, "ase32j28")
+            ProductFragment.newInstance(it as DishDto).show(childFragmentManager, ProductFragment.TAG)
         }
     )
 
@@ -108,27 +106,6 @@ class DishesFragment : Fragment() {
             chipTextChecked = chipTextChecked,
             chipText = chipText
         )
-//        Chip(context).apply {
-//            id = View.generateViewId()
-//            text = label
-//            isClickable = true
-//            isCheckable = true
-//            setChipSpacingHorizontalResource(R.dimen.dimen_16dp)
-//            chipBackgroundColor = ColorStateList(
-//                arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()), intArrayOf(
-//                    checkedChipColor,
-//                    chipColor
-//                )
-//            )
-//            setOnClickListener {
-//                setTextColor(resources.)
-//            }
-//            setTextColor(resources.getColor(R.color.chip_text_color))
-//            //setp
-//            isCheckedIconVisible = false
-//            isFocusable = true
-//            addView(this)
-//        }
     }
 
 
