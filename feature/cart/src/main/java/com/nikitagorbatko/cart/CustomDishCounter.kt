@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.nikitagorbatko.cart.databinding.ItemCounterBinding
 
-class CustomCounter
+class CustomDishCounter
 @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet?,
@@ -18,6 +18,7 @@ class CustomCounter
         set(value) {
             if (value >= 0) {
                 field = value
+                binding.textCounter.text = field.toString()
             }
         }
 
@@ -26,15 +27,17 @@ class CustomCounter
         binding.textCounter.text = counter.toString()
     }
 
-    fun setOnMinusClickListener(onClickListener: (result: Int) -> Unit) {
+    fun setOnMinusClickListener(onClickListener: () -> Unit) {
         binding.imageMinus.setOnClickListener {
-            onClickListener.invoke(--counter)
+            onClickListener.invoke()
+            binding.textCounter.text = (--counter).toString()
         }
     }
 
-    fun setOnPlusClickListener(onClickListener: (result: Int) -> Unit) {
-        binding.imageMinus.setOnClickListener {
-            onClickListener.invoke(++counter)
+    fun setOnPlusClickListener(onClickListener: () -> Unit) {
+        binding.imagePlus.setOnClickListener {
+            onClickListener.invoke()
+            binding.textCounter.text = (++counter).toString()
         }
     }
 }

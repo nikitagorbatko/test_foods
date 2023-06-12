@@ -13,6 +13,7 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.nikitagorbatko.main.databinding.FragmentMainBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -20,12 +21,14 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by viewModel()
+    private val sharedViewModel: SharedViewModel by inject()
 
     private val adapterDelegate = ListDelegationAdapter(
         categoryAdapterDelegate {
             val request = NavDeepLinkRequest.Builder
                 .fromUri("android-app://com.nikitagorbatko.testfoods/navigation_dishes".toUri())
                 .build()
+            it.name?.let { name -> sharedViewModel.setName(name) }
             findNavController().navigate(request)
         }
     )
@@ -50,7 +53,6 @@ class MainFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.categories.collect {
                 adapterDelegate.items = it
-                adapterDelegate.notifyDataSetChanged()
             }
         }
 

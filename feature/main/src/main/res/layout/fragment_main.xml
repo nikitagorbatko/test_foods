@@ -9,9 +9,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_categories"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_category"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_category" />
 
     <ProgressBar
         android:id="@+id/progress_categories"
@@ -26,8 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/sf_pro_display"
         android:text="@string/no_network"
         android:textColor="#7E57C2"
-        android:textSize="18sp"
+        android:textSize="28sp"
         android:visibility="gone" />
 </FrameLayout>

@@ -1,8 +1,12 @@
 package com.nikitagorbatko.cart_dishes
 
-import com.nikitagorbatko.database.DishDbo
+import com.nikitagorbatko.entity.Dish
 
 
 interface CartDishesRepository {
-    suspend fun getDishes(): List<DishDbo>
+    fun getDishes(): List<CartDish>
+
+    fun addDish(dish: Dish)
+
+    fun minusDish(dish: Dish): Boolean // returns true if removes item
 }

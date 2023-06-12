@@ -28,7 +28,6 @@
         android:name="com.nikitagorbatko.category.DishesFragment"
         android:label="@string/title_category"
         tools:layout="@layout/fragment_dishes">
-
         <deepLink app:uri="android-app://com.nikitagorbatko.testfoods/navigation_dishes" />
     </fragment>
 

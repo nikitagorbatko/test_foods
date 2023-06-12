@@ -3,4 +3,6 @@
     <color name="counter_background">#EFEEEC</color>
     <color name="button_color">#3364E0</color>
     <color name="white">#fff</color>
+
+    <color name="image_background">#F8F7F5</color>
 </resources>

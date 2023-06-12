@@ -7,5 +7,5 @@ interface Dish {
     val weight: Int?
     val description: String?
     val imageUrl: String?
-    val tegs: List<String>
+    val tags: List<String>
 }

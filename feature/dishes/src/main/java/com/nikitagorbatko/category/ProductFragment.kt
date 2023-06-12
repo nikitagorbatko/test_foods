@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.nikitagorbatko.category.databinding.FragmentProductBinding
 import com.nikitagorbatko.network.DishDto
@@ -16,6 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProductFragment private constructor() : DialogFragment() {
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: ProductViewModel by viewModel()
 
     companion object {
         const val TAG = "ProductDialog"
@@ -55,7 +58,12 @@ class ProductFragment private constructor() : DialogFragment() {
             imageClose.setOnClickListener {
                 dialog?.cancel()
             }
-
+            buttonAdd.setOnClickListener {
+                if (dish != null) {
+                    viewModel.addDish(dish)
+                }
+                dismiss()
+            }
             Glide
                 .with(root)
                 .load(dish?.imageUrl ?: dish?.description)

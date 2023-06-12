@@ -15,7 +15,7 @@ data class DishDto(
     @Json(name = "weight") override val weight: Int? = null,
     @Json(name = "description") override val description: String? = null,
     @Json(name = "image_url") override val imageUrl: String? = null,
-    @Json(name = "tegs") override val tegs: List<String> = listOf()
+    @Json(name = "tegs") override val tags: List<String> = listOf()
 ) : Dish, Parcelable
 
 

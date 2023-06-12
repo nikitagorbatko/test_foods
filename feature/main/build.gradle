@@ -37,6 +37,7 @@ dependencies {
     implementation project(path: ':data:categories')
     implementation project(path: ':data:dishes')
     implementation project(path: ':network')
+    implementation project(path: ':entity')
 
     implementation "io.insert-koin:koin-android:3.4.0"
 

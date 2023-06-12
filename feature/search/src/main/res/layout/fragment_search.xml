@@ -9,8 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/sf_pro_display"
+        android:text="Coming soon"
         android:textSize="28sp"
-        android:textStyle="bold"
-        android:text="Coming soon" />
+        android:textStyle="bold" />
 
 </FrameLayout>

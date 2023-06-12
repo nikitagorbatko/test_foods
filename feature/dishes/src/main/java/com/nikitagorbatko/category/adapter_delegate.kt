@@ -6,14 +6,15 @@ import com.nikitagorbatko.category.databinding.ItemDishBinding
 import com.nikitagorbatko.entity.Dish
 import com.nikitagorbatko.network.DishDto
 
+
 fun dishAdapterDelegate(onItemClick: (Dish) -> Unit) =
     adapterDelegateViewBinding<DishDto, Dish, ItemDishBinding>({ layoutInflater, parent ->
         ItemDishBinding.inflate(layoutInflater, parent, false)
     }) {
-        binding.root.setOnClickListener {
-            onItemClick(item)
-        }
         bind {
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
             Glide
                 .with(binding.root)
                 .load(item.imageUrl ?: item.description)

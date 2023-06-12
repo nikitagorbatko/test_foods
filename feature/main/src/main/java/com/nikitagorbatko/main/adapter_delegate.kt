@@ -2,8 +2,8 @@ package com.nikitagorbatko.main
 
 import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import com.nikitagorbatko.entity.Category
 import com.nikitagorbatko.main.databinding.ItemCategoryBinding
-import com.nikitagorbatko.network.Category
 import com.nikitagorbatko.network.CategoryDto
 
 fun categoryAdapterDelegate(onItemClick: (Category) -> Unit) = adapterDelegateViewBinding<CategoryDto, Category, ItemCategoryBinding>({

@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
@@ -48,7 +49,7 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_like"
                     app:layout_constraintEnd_toStartOf="@+id/image_close"
-                    app:layout_constraintTop_toTopOf="@+id/container"  />
+                    app:layout_constraintTop_toTopOf="@+id/container" />
 
                 <ImageButton
                     android:id="@+id/image_close"
@@ -72,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ellipsize="end"
+            android:fontFamily="@font/sf_pro_display"
             android:gravity="start"
             android:maxLines="1"
             android:textColor="#000"
@@ -96,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/sf_pro_display"
                 android:textColor="#000"
                 android:textSize="14sp"
                 tools:text="390₽" />
@@ -105,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/sf_pro_display"
                 android:textColor="#A6000000"
                 android:textSize="14sp"
                 tools:text=" · 420г" />
@@ -116,6 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
+            android:fontFamily="@font/sf_pro_display"
             android:gravity="start"
             android:maxLines="4"
             android:textColor="#A6000000"
@@ -125,7 +130,7 @@
             tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
+            android:id="@+id/button_add"
             style="Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="70dp"

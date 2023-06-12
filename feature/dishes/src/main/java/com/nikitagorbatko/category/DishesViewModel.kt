@@ -11,19 +11,29 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DishesViewModel(private val repository: DishesRepository) : ViewModel() {
+    val dishTags = mutableListOf<String>()
+
     private val _state = MutableStateFlow(State.LOADING)
     val state = _state.asStateFlow()
 
     private val _categories = MutableSharedFlow<List<DishDto>>()
     val categories = _categories.asSharedFlow()
 
-    fun getDishes() {
+    fun getDishes(checkedChips: List<String>? = null) {
         viewModelScope.launch {
             _state.emit(State.LOADING)
             try {
                 val categories = repository.getDishes().dishes
                 if (categories.isNotEmpty()) {
-                    _categories.emit(categories)
+                    if (checkedChips != null && checkedChips.isNotEmpty()) {
+                        _categories.emit(
+                            categories.filter {
+                                checkedChips.intersect(it.tags.toSet()).isNotEmpty()
+                            }
+                        )
+                    } else {
+                        _categories.emit(categories)
+                    }
                     _state.emit(State.PRESENT)
                 } else {
                     _state.emit(State.ERROR)

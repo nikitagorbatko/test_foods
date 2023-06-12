@@ -116,7 +116,7 @@
             tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
+            android:id="@+id/button_add"
             style="Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="60dp"

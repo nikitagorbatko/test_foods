@@ -8,7 +8,8 @@ import com.nikitagorbatko.cart_dishes.CartDishesRepositoryImpl
 import com.nikitagorbatko.categories.CategoriesRepository
 import com.nikitagorbatko.categories.CategoriesRepositoryImpl
 import com.nikitagorbatko.category.DishesViewModel
-import com.nikitagorbatko.database.DishDatabase
+import com.nikitagorbatko.category.ProductViewModel
+import com.nikitagorbatko.main.SharedViewModel
 import com.nikitagorbatko.dishes.DishesRepository
 import com.nikitagorbatko.dishes.DishesRepositoryImpl
 import com.nikitagorbatko.main.MainViewModel
@@ -32,16 +33,14 @@ class App : Application() {
         viewModel { DishesViewModel(get()) }
         viewModel { MainViewModel(get()) }
         viewModel { SearchViewModel() }
-    }
-
-    private val database = module {
-        single { DishDatabase.getInstance(androidContext()) }
+        viewModel { ProductViewModel(get()) }
+        single { SharedViewModel() }
     }
 
     private val data = module {
         single<DishesRepository> { DishesRepositoryImpl(get()) }
         single<CategoriesRepository> { CategoriesRepositoryImpl(get()) }
-        single<CartDishesRepository> { CartDishesRepositoryImpl(get()) }
+        single<CartDishesRepository> { CartDishesRepositoryImpl() }
     }
 
     override fun onCreate() {
@@ -50,7 +49,6 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             modules(
-                database,
                 features,
                 data,
                 network
