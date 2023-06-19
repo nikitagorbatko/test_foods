@@ -4,10 +4,11 @@ import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.nikitagorbatko.cart.databinding.ItemProductBinding
 import com.nikitagorbatko.cart_dishes.CartDish
+import com.nikitagorbatko.database_entities.CartDishDbo
 import com.nikitagorbatko.entity.Dish
 
-fun cartDishAdapterDelegate(onPlusClick: (CartDish) -> Unit, onMinusClick: (CartDish) -> Unit) =
-    adapterDelegateViewBinding<CartDish, Dish, ItemProductBinding>({ layoutInflater, parent ->
+fun cartDishAdapterDelegate(onPlusClick: (CartDishDbo) -> Unit, onMinusClick: (CartDishDbo) -> Unit) =
+    adapterDelegateViewBinding<CartDishDbo, Dish, ItemProductBinding>({ layoutInflater, parent ->
         ItemProductBinding.inflate(layoutInflater, parent, false)
     }) {
         bind {

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.nikitagorbatko.category.databinding.FragmentProductBinding
+import com.nikitagorbatko.database_entities.CartDishDbo
 import com.nikitagorbatko.network.DishDto
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -58,9 +59,20 @@ class ProductFragment private constructor() : DialogFragment() {
             imageClose.setOnClickListener {
                 dialog?.cancel()
             }
-            buttonAdd.setOnClickListener {
+            buttonAdd.setOnClickListener { view ->
                 if (dish != null) {
-                    viewModel.addDish(dish)
+                    viewModel.addDish(
+                        CartDishDbo(
+                            id = dish.id,
+                            description = dish.description,
+                            name = dish.name,
+                            price = dish.price,
+                            weight = dish.weight,
+                            imageUrl = dish.imageUrl,
+                            tags = dish.tags,
+                            amount = 1
+                        )
+                    )
                 }
                 dismiss()
             }

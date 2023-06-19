@@ -4,54 +4,65 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nikitagorbatko.cart_dishes.CartDish
 import com.nikitagorbatko.cart_dishes.CartDishesRepository
+import com.nikitagorbatko.cart_dishes_use_case.AddCartDishUseCase
+import com.nikitagorbatko.cart_dishes_use_case.GetCartDishesUseCase
+import com.nikitagorbatko.cart_dishes_use_case.RemoveCartDishUseCase
+import com.nikitagorbatko.database_entities.CartDishDbo
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class CartViewModel(private val repository: CartDishesRepository) : ViewModel() {
+class CartViewModel(
+    private val getCartDishesUseCase: GetCartDishesUseCase,
+    private val addCartDishesUseCase: AddCartDishUseCase,
+    private val removeCartDishUseCase: RemoveCartDishUseCase
+) : ViewModel() {
     private val _totalPrice = Channel<Int>()
     val totalPrice = _totalPrice.receiveAsFlow()
 
     private val _state = MutableStateFlow(State.LOADING)
     val state = _state.asStateFlow()
 
-    private val _dishes = MutableStateFlow<List<CartDish>>(listOf())
+    private val _dishes = MutableStateFlow<List<CartDishDbo>>(listOf())
     val dishes = _dishes.asStateFlow()
 
     fun getDishes() {
         viewModelScope.launch {
             _state.tryEmit(State.LOADING)
-            val dishes = repository.getDishes()
-            if (dishes.isNotEmpty()) {
-                _dishes.emit(dishes)
-                _totalPrice.send(dishes.sumOf { (it.price ?: 0) * it.amount })
-                _state.emit(State.PRESENT)
-            } else {
-                _state.emit(State.NO_DISHES)
+            getCartDishesUseCase.execute().collect { dishes ->
+                if (dishes.isNotEmpty()) {
+                    _dishes.emit(dishes)
+                    _totalPrice.send(dishes.sumOf { (it.price ?: 0) * it.amount })
+                    _state.emit(State.PRESENT)
+                } else {
+                    _state.emit(State.NO_DISHES)
+                }
             }
         }
     }
 
-    fun addDish(cartDish: CartDish) {
-        repository.addDish(cartDish)
+    fun addDish(cartDish: CartDishDbo) {
         viewModelScope.launch {
-            val dishes = repository.getDishes()
-            _totalPrice.send(dishes.sumOf { (it.price ?: 0) * it.amount })
-            _dishes.emit(dishes)
+            addCartDishesUseCase.execute(cartDish)
+//            val dishes = getCartDishesUseCase.execute()
+//            dishes.singleOrNull()?.sumOf { (it.price ?: 0) * it.amount }?.let { _totalPrice.send(it) }
+            //_dishes.emit(dishes)
         }
     }
 
-    fun minusDish(cartDish: CartDish) {
-        repository.minusDish(cartDish)
+    fun minusDish(cartDish: CartDishDbo) {
         viewModelScope.launch {
-            val dishes = repository.getDishes()
-            _totalPrice.send(dishes.sumOf { (it.price ?: 0) * it.amount })
-            if (dishes.isEmpty()) {
-                _state.emit(State.NO_DISHES)
-            } else {
-                _dishes.emit(dishes)
-            }
+            removeCartDishUseCase.execute(cartDish)
         }
+//        viewModelScope.launch {
+//            val dishes = getCartDishesUseCase.execute()
+//            _totalPrice.send(dishes.sumOf { (it.price ?: 0) * it.amount })
+//            if (dishes.isEmpty()) {
+//                _state.emit(State.NO_DISHES)
+//            } else {
+//                _dishes.emit(dishes)
+//            }
+//        }
     }
 
     enum class State {

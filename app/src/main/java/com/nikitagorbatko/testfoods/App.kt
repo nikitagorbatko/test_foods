@@ -5,13 +5,19 @@ import com.nikitagorbatko.account.AccountViewModel
 import com.nikitagorbatko.cart.CartViewModel
 import com.nikitagorbatko.cart_dishes.CartDishesRepository
 import com.nikitagorbatko.cart_dishes.CartDishesRepositoryImpl
+import com.nikitagorbatko.cart_dishes_use_case.AddCartDishUseCase
+import com.nikitagorbatko.cart_dishes_use_case.GetCartDishesUseCase
+import com.nikitagorbatko.cart_dishes_use_case.RemoveCartDishUseCase
 import com.nikitagorbatko.categories.CategoriesRepository
 import com.nikitagorbatko.categories.CategoriesRepositoryImpl
+import com.nikitagorbatko.categories_use_case.GetCategoriesUseCase
 import com.nikitagorbatko.category.DishesViewModel
 import com.nikitagorbatko.category.ProductViewModel
+import com.nikitagorbatko.database_entities.CartDishDatabase
 import com.nikitagorbatko.main.SharedViewModel
 import com.nikitagorbatko.dishes.DishesRepository
 import com.nikitagorbatko.dishes.DishesRepositoryImpl
+import com.nikitagorbatko.dishes_use_case.GetDishesUseCase
 import com.nikitagorbatko.main.MainViewModel
 import com.nikitagorbatko.network.Retrofit
 import com.nikitagorbatko.search.SearchViewModel
@@ -29,7 +35,7 @@ class App : Application() {
 
     private val features = module {
         viewModel { AccountViewModel() }
-        viewModel { CartViewModel(get()) }
+        viewModel { CartViewModel(get(), get(), get()) }
         viewModel { DishesViewModel(get()) }
         viewModel { MainViewModel(get()) }
         viewModel { SearchViewModel() }
@@ -37,10 +43,22 @@ class App : Application() {
         single { SharedViewModel() }
     }
 
+    private val domain = module {
+        factory { GetCartDishesUseCase(get()) }
+        factory { AddCartDishUseCase(get()) }
+        factory { RemoveCartDishUseCase(get()) }
+        factory { GetCategoriesUseCase(get()) }
+        factory { GetDishesUseCase(get()) }
+    }
+
     private val data = module {
         single<DishesRepository> { DishesRepositoryImpl(get()) }
         single<CategoriesRepository> { CategoriesRepositoryImpl(get()) }
-        single<CartDishesRepository> { CartDishesRepositoryImpl() }
+        single<CartDishesRepository> { CartDishesRepositoryImpl(get()) }
+    }
+
+    private val database = module {
+        single { CartDishDatabase.getCartDishDao(androidContext()) }
     }
 
     override fun onCreate() {
@@ -49,6 +67,8 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             modules(
+                database,
+                domain,
                 features,
                 data,
                 network

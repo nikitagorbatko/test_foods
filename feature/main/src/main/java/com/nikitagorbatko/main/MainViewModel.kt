@@ -3,6 +3,7 @@ package com.nikitagorbatko.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nikitagorbatko.categories.CategoriesRepository
+import com.nikitagorbatko.categories_use_case.GetCategoriesUseCase
 import com.nikitagorbatko.network.CategoryDto
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: CategoriesRepository) : ViewModel() {
+class MainViewModel(private val getCategoriesUseCase: GetCategoriesUseCase) : ViewModel() {
     private val _state = MutableStateFlow(State.LOADING)
     val state = _state.asStateFlow()
 
@@ -21,7 +22,7 @@ class MainViewModel(private val repository: CategoriesRepository) : ViewModel() 
         viewModelScope.launch {
             _state.emit(State.LOADING)
             try {
-                val categories = repository.getCategories().categories
+                val categories = getCategoriesUseCase.execute()
                 if (categories.isNotEmpty()) {
                     _categories.emit(categories)
                     _state.emit(State.PRESENT)

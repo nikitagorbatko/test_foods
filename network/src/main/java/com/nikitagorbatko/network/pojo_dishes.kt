@@ -19,6 +19,8 @@ data class DishDto(
 ) : Dish, Parcelable
 
 
+
+
 @JsonClass(generateAdapter = true)
 data class DishesResponseDto(
     @Json(name = "dishes") val dishes: List<DishDto> = listOf()

@@ -1,12 +1,14 @@
 package com.nikitagorbatko.cart_dishes
 
+import com.nikitagorbatko.database_entities.CartDishDbo
 import com.nikitagorbatko.entity.Dish
+import kotlinx.coroutines.flow.Flow
 
 
 interface CartDishesRepository {
-    fun getDishes(): List<CartDish>
+    fun getDishes(): Flow<List<CartDishDbo>>
 
-    fun addDish(dish: Dish)
+    suspend fun addDish(dish: CartDishDbo)
 
-    fun minusDish(dish: Dish): Boolean // returns true if removes item
+    suspend fun removeDish(dish: CartDishDbo): Boolean // returns true if removes item
 }
