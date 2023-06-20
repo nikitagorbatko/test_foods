@@ -30,14 +30,14 @@ class CustomDishCounter
     fun setOnMinusClickListener(onClickListener: () -> Unit) {
         binding.imageMinus.setOnClickListener {
             onClickListener.invoke()
-            binding.textCounter.text = (--counter).toString()
+            //binding.textCounter.text = (--counter).toString()
         }
     }
 
     fun setOnPlusClickListener(onClickListener: () -> Unit) {
         binding.imagePlus.setOnClickListener {
             onClickListener.invoke()
-            binding.textCounter.text = (++counter).toString()
+            //binding.textCounter.text = (++counter).toString()
         }
     }
 }

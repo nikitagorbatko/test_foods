@@ -2,7 +2,6 @@ package com.nikitagorbatko.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nikitagorbatko.categories.CategoriesRepository
 import com.nikitagorbatko.categories_use_case.GetCategoriesUseCase
 import com.nikitagorbatko.network.CategoryDto
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,7 +21,7 @@ class MainViewModel(private val getCategoriesUseCase: GetCategoriesUseCase) : Vi
         viewModelScope.launch {
             _state.emit(State.LOADING)
             try {
-                val categories = getCategoriesUseCase.execute()
+                val categories = getCategoriesUseCase()
                 if (categories.isNotEmpty()) {
                     _categories.emit(categories)
                     _state.emit(State.PRESENT)

@@ -32,7 +32,8 @@ android {
 
 dependencies {
     implementation project(path: ":entity")
-    implementation project(path: ":database_entities")
+    implementation project(path: ':database')
+    implementation project(path: ':domain:repositories')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

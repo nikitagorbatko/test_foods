@@ -1,7 +1,7 @@
 package com.nikitagorbatko.categories_use_case
 
-import com.nikitagorbatko.categories.CategoriesRepository
+import com.nikitagorbatko.repositories.CategoriesRepository
 
 class GetCategoriesUseCase(private val repository: CategoriesRepository) {
-    suspend fun execute() = repository.getCategories().categories
+    suspend operator fun invoke() = repository.getCategories().categories
 }

@@ -22,8 +22,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 

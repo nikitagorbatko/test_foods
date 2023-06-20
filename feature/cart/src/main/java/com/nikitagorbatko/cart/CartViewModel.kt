@@ -2,14 +2,14 @@ package com.nikitagorbatko.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nikitagorbatko.cart_dishes.CartDish
-import com.nikitagorbatko.cart_dishes.CartDishesRepository
 import com.nikitagorbatko.cart_dishes_use_case.AddCartDishUseCase
 import com.nikitagorbatko.cart_dishes_use_case.GetCartDishesUseCase
 import com.nikitagorbatko.cart_dishes_use_case.RemoveCartDishUseCase
 import com.nikitagorbatko.database_entities.CartDishDbo
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class CartViewModel(
@@ -29,7 +29,7 @@ class CartViewModel(
     fun getDishes() {
         viewModelScope.launch {
             _state.tryEmit(State.LOADING)
-            getCartDishesUseCase.execute().collect { dishes ->
+            getCartDishesUseCase().collect { dishes ->
                 if (dishes.isNotEmpty()) {
                     _dishes.emit(dishes)
                     _totalPrice.send(dishes.sumOf { (it.price ?: 0) * it.amount })
@@ -43,7 +43,7 @@ class CartViewModel(
 
     fun addDish(cartDish: CartDishDbo) {
         viewModelScope.launch {
-            addCartDishesUseCase.execute(cartDish)
+            addCartDishesUseCase(cartDish)
 //            val dishes = getCartDishesUseCase.execute()
 //            dishes.singleOrNull()?.sumOf { (it.price ?: 0) * it.amount }?.let { _totalPrice.send(it) }
             //_dishes.emit(dishes)
@@ -52,7 +52,7 @@ class CartViewModel(
 
     fun minusDish(cartDish: CartDishDbo) {
         viewModelScope.launch {
-            removeCartDishUseCase.execute(cartDish)
+            removeCartDishUseCase(cartDish)
         }
 //        viewModelScope.launch {
 //            val dishes = getCartDishesUseCase.execute()

@@ -2,10 +2,9 @@ package com.nikitagorbatko.cart_dishes
 
 import com.nikitagorbatko.database_entities.CartDishDao
 import com.nikitagorbatko.database_entities.CartDishDbo
+import com.nikitagorbatko.repositories.CartDishesRepository
 
 class CartDishesRepositoryImpl(private val cartDishDao: CartDishDao) : CartDishesRepository {
-    //private val savedDishes = mutableSetOf<CartDish>()
-
     override fun getDishes() = cartDishDao.getCartDishes()
 
     override suspend fun addDish(dish: CartDishDbo) {
@@ -26,37 +25,15 @@ class CartDishesRepositoryImpl(private val cartDishDao: CartDishDao) : CartDishe
                 )
             )
         }
-//        var savedIndex = -1
-//        savedDishes.forEachIndexed { index, cartDish ->
-//            if (cartDish.id == dish.id) {
-//                cartDish.amount++
-//                savedIndex = index
-//            }
-//        }
-//        if (savedIndex == -1) {
-//            savedDishes.add(
-//                CartDish(
-//                    id = dish.id,
-//                    name = dish.name ?: "",
-//                    price = dish.price,
-//                    weight = dish.weight,
-//                    description = dish.description,
-//                    imageUrl = dish.imageUrl,
-//                    tags = dish.tags,
-//                    amount = 1
-//                )
-//            )
-//        }
     }
 
     override suspend fun removeDish(dish: CartDishDbo): Boolean {
-
-//        savedDishes.forEach {
-//            if (it.id == dish.id) {
-//                it.amount--
-//            }
-//        }
-//        return savedDishes.removeIf { it.amount < 1 }
-        return cartDishDao.deleteCartDish(dish.id) > 0
+        val savedDish = cartDishDao.getDish(dish.id)
+        return if (savedDish != null && savedDish.amount > 1) {
+            cartDishDao.updateDish(savedDish.also { it.amount-- })
+            false
+        } else {
+            cartDishDao.deleteCartDish(dish.id) > 0
+        }
     }
 }

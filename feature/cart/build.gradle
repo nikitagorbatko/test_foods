@@ -37,7 +37,7 @@ dependencies {
     implementation project(path: ':entity')
     implementation project(path: ':domain:cart_dishes_use_case')
     implementation project(path: ':data:cart_dishes')
-    implementation project(path: ':database_entities')
+    implementation project(path: ':database')
 
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
 

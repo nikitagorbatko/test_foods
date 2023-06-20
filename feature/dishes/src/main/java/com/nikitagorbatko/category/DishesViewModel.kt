@@ -2,7 +2,6 @@ package com.nikitagorbatko.category
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nikitagorbatko.dishes.DishesRepository
 import com.nikitagorbatko.dishes_use_case.GetDishesUseCase
 import com.nikitagorbatko.network.DishDto
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,7 +23,8 @@ class DishesViewModel(private val getDishesUseCase: GetDishesUseCase) : ViewMode
         viewModelScope.launch {
             _state.emit(State.LOADING)
             try {
-                val categories = getDishesUseCase.execute()
+                getDishesUseCase()
+                val categories = getDishesUseCase()
                 if (categories.isNotEmpty()) {
                     if (checkedChips != null && checkedChips.isNotEmpty()) {
                         _categories.emit(
