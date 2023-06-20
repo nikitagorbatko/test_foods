@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.nikitagorbatko.category.databinding.FragmentProductBinding
 import com.nikitagorbatko.database_entities.CartDishDbo
@@ -48,28 +46,28 @@ class ProductFragment private constructor() : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dish = arguments?.getParcelable<DishDto>(KEY_DISH)
-        val weigh = " · ${dish?.weight}г"
-        val price = "${dish?.price}₽"
+        val dishDto = arguments?.getParcelable<DishDto>(KEY_DISH)
+        val weigh = " · ${dishDto?.weight}г"
+        val price = "${dishDto?.price}₽"
         with(binding) {
             textPrice.text = price
             textGrams.text = weigh
-            textDescription.text = dish?.description
-            textTitle.text = dish?.name
+            textDescription.text = dishDto?.description
+            textTitle.text = dishDto?.name
             imageClose.setOnClickListener {
                 dialog?.cancel()
             }
             buttonAdd.setOnClickListener { view ->
-                if (dish != null) {
+                if (dishDto != null) {
                     viewModel.addDish(
                         CartDishDbo(
-                            id = dish.id,
-                            description = dish.description,
-                            name = dish.name,
-                            price = dish.price,
-                            weight = dish.weight,
-                            imageUrl = dish.imageUrl,
-                            tags = dish.tags,
+                            id = dishDto.id,
+                            description = dishDto.description,
+                            name = dishDto.name,
+                            price = dishDto.price,
+                            weight = dishDto.weight,
+                            imageUrl = dishDto.imageUrl,
+                            tags = dishDto.tags,
                             amount = 1
                         )
                     )
@@ -78,7 +76,7 @@ class ProductFragment private constructor() : DialogFragment() {
             }
             Glide
                 .with(root)
-                .load(dish?.imageUrl ?: dish?.description)
+                .load(dishDto?.imageUrl ?: dishDto?.description)
                 .into(imageView)
         }
     }
